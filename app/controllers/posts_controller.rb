@@ -7,12 +7,13 @@ class PostsController < ApplicationController
 
         if params[:search] != nil && params[:search] != ''
             search = params[:search]
-            @posts = Post.where("title LIKE ? OR genre = ? ", "%#{search}%", "%#{search}%")
+            @posts = Post.joins(:user).where("title LIKE ? OR genre = ? ", "%#{search}%", "%#{search}%")
+        elsif params[:genre] != nil && params[:genre] != ''
+            search = params[:genre]
+            @posts = Post.where("genre = ? ",params[:genre])
         else
-            @pots = Post.all
+            @posts = Post.all
         end
-
-        
         
     end
 
