@@ -1,0 +1,72 @@
+<section id="five-block">
+    <div class="title-container">
+        <h3>口コミ詳細</h3>
+        <br>
+        <div class="post">
+            <div class="item">
+                <%= image_tag @post.image_url, size: "250x200" if @post.image? %>
+            </div>
+            &emsp;
+            <div class="item2">
+                <p>&emsp;<%= @post.title %>
+                <% if user_signed_in? %>
+                    <% if current_user.already_liked?(@post) %>
+                        <%= link_to post_like_path(@post), method: :delete do %>
+                            <i class="fas fa-heart"></i><%= @post.likes.count %>
+                        <% end %>
+                    <% else %>
+                        <%= link_to post_likes_path(@post), method: :post do %>
+                            <i class="fas fa-heart"></i><%= @post.likes.count %>
+                        <% end %>
+                    <% end %>
+                <% else %>
+                    <i class="fas fa-heart"></i><%= @post.likes.count %>
+                <% end %>
+                &emsp;<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+                <p><%= @post.body %></p>
+                <div class="item3">
+                    <p>(<%= @post.genre %>
+                    <%= @post.price %>)</p>
+                </div>
+                <% if user_signed_in? && current_user.id == @post.user_id %> 
+                    <%= link_to "編集する", edit_post_path(@post.id) %>
+                    &emsp;<%= link_to "削除する", post_path(@post.id), method: :delete %>
+                <% end %>
+            </div>
+        </div>
+        <div class="comment-wrapper">
+            <br>
+            <h4>コメント一覧</h4>
+            <% @comments.each do |c| %>
+                <div>
+                    <%= c.user.name unless c.user.blank? %>
+                    &nbsp;<%= @post.created_at.strftime('%Y/%m/%d') %>
+                    <br>
+                    <%= c.content %>
+                    <div class="btn-group">
+                        <% if current_user.id == c.user_id %>
+                            <%= link_to "Delete", post_comment_path(@post,c), method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+                        <% end %>
+                    </div>
+                </div>
+                <br>
+            <% end %>
+            <% if user_signed_in? %>
+                <%= form_with(model: [@post, @comment], local: true) do |f| %>
+                    <%= f.text_area :content %>
+                    <%= button_tag type: "submit" do %>
+                        <i class="far fa-comments"></i> コメントする
+                    <% end %>
+                <% end %>
+            <% end %>
+        </div>
+        <br>
+        <h4>いいねしたユーザー</h4>
+        <% @post.liked_users.each do |user| %>
+            <%= user.name %>
+        <% end %>
+        <br>
+        <br>
+        <br>
+    </div>
+</section>

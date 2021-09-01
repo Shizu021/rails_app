@@ -1,0 +1,69 @@
+<section id="six-block">
+    <div class="title-container">
+        <br>
+        <br>
+        <br>
+        <br>
+        <h3>マイページ</h3>
+        <p>名前 : <%= @user.name %></p>
+        <p>メールアドレス : <%= @user.email %></p>
+        <p>プロフィール : <%= @user.profile %></p>
+
+        <% if current_user.id == @user.id %>
+            <%= link_to "編集する", edit_user_registration_path %>
+        <% end %>
+    </div>
+        <br>
+        <br>
+        <h4>ユーザーの投稿一覧</h4>
+        <div class="posts-container">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <% @user.posts.each do |t| %>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="p-3 mb-2 bg-light text-dark h-100">
+                                <%= link_to post_path(t.id), class: 'link' do %>
+                                    <img src=<%= t.image_url %> class="card-img-top" >
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= t.title %>
+                                <% end %>
+                                        <i class="far fa-heart"></i><%= t.likes.count %></h5>
+                                        <p class="card-text"><%= t.body %></p>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">ジャンル</li>
+                                            <li class="list-group-item">値段</li>
+                                        </ul>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+                <br>
+            </div>
+        </div>
+        <br>
+        <h4>ユーザーがいいねした投稿一覧</h4>
+        <div class="like">
+            <% @user.liked_posts.each do |t| %>
+                <%= link_to post_path(t.id), class: 'link' do %>
+                    <div class="item">
+                        <%= image_tag t.image_url, size: "250x200" if t.image? %>
+                    </div>
+                <% end %>
+                &emsp;
+                <div class="item2">
+                    <p>&emsp;<%= t.title %>
+                    <i class="far fa-heart"></i><%= t.likes.count %>
+                    &emsp;<%= t.created_at.strftime('%Y/%m/%d') %></p>
+                    <%= t.body %>
+                </div>
+                <br>
+            <% end %>
+            <br>
+        </div>
+    <br>
+    <br>
+    <h6><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></h6>
+    <br>
+    <br>
+</section>

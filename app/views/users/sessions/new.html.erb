@@ -1,0 +1,31 @@
+<section id="seven-block">
+  <div class="title-container">
+    <h3>ログイン</h3>
+    <p>※登録したメールアドレスとパスワードを入力してください。</p>
+    <br>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <h4>メール </h4>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <h4>パスワード </h4>
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+
+      <% if devise_mapping.rememberable? -%>
+        <div class="field">
+          <p><%= f.check_box :remember_me %>私を覚える</p>
+        </div>
+      <% end -%>
+
+      <div class="actions">
+        <%= f.submit "ログイン" %>
+      </div>
+    <% end %>
+
+    <br>
+        <%= link_to "新規登録", new_user_registration_path %>
+  </div>
+</section>
