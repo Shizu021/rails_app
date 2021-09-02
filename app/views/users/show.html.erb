@@ -45,11 +45,13 @@
         <h4>ユーザーがいいねした投稿一覧</h4>
         <div class="like">
             <% @user.liked_posts.each do |t| %>
-                <%= link_to post_path(t.id), class: 'link' do %>
-                    <div class="item">
+                <div class="item">
+                    <br>
+                    &nbsp;
+                    <%= link_to post_path(t.id), class: 'link' do %>
                         <%= image_tag t.image_url, size: "250x200" if t.image? %>
-                    </div>
-                <% end %>
+                    <% end %>
+                </div>
                 &emsp;
                 <div class="item2">
                     <p>&emsp;<%= t.title %>
