@@ -1,5 +1,6 @@
 <section id="four-block">
-    <div class="title-container">
+    <div class="title2-container">
+        <br>
         <h4>新規投稿</h4>
         <br>
         <br>
@@ -9,8 +10,10 @@
                 <%= f.text_field :title, :size => 40 %>
                 <br>
                 <br>
+                &emsp;
                 <%= f.label :レビュー %>
                 <%= f.text_field :body, :size => 75 %>
+                &emsp;
             </div>
             <br>
             ジャンル
@@ -27,5 +30,6 @@
             <br>
             <%= f.submit "投稿する" %>
         <% end %>
+        <br>
     </div>
 </section>

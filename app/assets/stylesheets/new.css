@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
 }
-.title-container{
-    color: #F8F8FF;
+.title2-container{
+    background-color: rgba(255, 255, 255, 0.5);
     text-align: center;
 }
