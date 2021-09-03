@@ -16,70 +16,74 @@
         <% end %>
     </div>
         <br>
-        <br>
-        <h4>ユーザーの投稿一覧</h4>
-        <br>
-        <div class="posts-container">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <% @user.posts.each do |t| %>
-                    <div class="col">
-                        <div class="card h-100">
-                            <div class="p-3 mb-2 bg-light text-dark h-100">
-                                <%= link_to post_path(t.id), class: 'link' do %>
-                                    <img src=<%= t.image_url %> class="card-img-top" >
-                                    <div class="card-body">
-                                        <h5 class="card-title"><%= t.title %>
-                                <% end %>
-                                        <i class="far fa-heart"></i><%= t.likes.count %></h5>
-                                        <p class="card-text"><%= t.body %></p>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">ジャンル&emsp;<%= t.genre %></li>
-                                            <li class="list-group-item">値段&emsp;&emsp;&nbsp;<%= t.price %></li>
-                                        </ul>
-                                    </div>
+        <div class="title2-container">
+            <br>
+            <h4>ユーザーの投稿一覧</h4>
+            <br>
+            <div class="posts-container">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <% @user.posts.each do |t| %>
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="p-3 mb-2 bg-light text-dark h-100">
+                                    <%= link_to post_path(t.id), class: 'link' do %>
+                                        <img src=<%= t.image_url %> class="card-img-top" >
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= t.title %>
+                                    <% end %>
+                                            <i class="far fa-heart"></i><%= t.likes.count %></h5>
+                                            <p class="card-text"><%= t.body %></p>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">ジャンル&emsp;<%= t.genre %></li>
+                                                <li class="list-group-item">値段&emsp;&emsp;&nbsp;<%= t.price %></li>
+                                            </ul>
+                                        </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <% end %>
-                <br>
+                    <% end %>
+                    <br>
+                </div>
             </div>
         </div>
         <br>
         <br>
-        <br>
-        <h4>ユーザーがいいねした投稿一覧</h4>
-        <br>
-        <div class="posts-container">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <% @user.liked_posts.each do |t| %>
-                    <div class="col">
-                        <div class="card h-100">
-                            <div class="p-3 mb-2 bg-light text-dark h-100">
-                                <%= link_to post_path(t.id), class: 'link' do %>
-                                    <img src=<%= t.image_url %> class="card-img-top" >
-                                    <div class="card-body">
-                                        <h5 class="card-title"><%= t.title %>
-                                <% end %>
-                                        <% if user_signed_in? %>
-                                            <% if current_user.already_liked?(t) %>
-                                                <%= link_to post_like_path(id: t.id, post_id: t.id), method: :delete do %>
-                                                    <i class="fas fa-heart"></i><%= t.likes.count %>
+        <div class="title2-container">
+            <br>
+            <h4>ユーザーがいいねした投稿一覧</h4>
+            <br>
+            <div class="posts-container">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <% @user.liked_posts.each do |t| %>
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="p-3 mb-2 bg-light text-dark h-100">
+                                    <%= link_to post_path(t.id), class: 'link' do %>
+                                        <img src=<%= t.image_url %> class="card-img-top" >
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= t.title %>
+                                    <% end %>
+                                            <% if user_signed_in? %>
+                                                <% if current_user.already_liked?(t) %>
+                                                    <%= link_to post_like_path(id: t.id, post_id: t.id), method: :delete do %>
+                                                        <i class="fas fa-heart"></i><%= t.likes.count %>
+                                                    <% end %>
+                                                <% else %>
+                                                    <%= link_to post_likes_path(id: t.id, post_id: t.id), method: :post do %>
+                                                        <i class="fas fa-heart"></i><%= t.likes.count %>
+                                                    <% end %>
                                                 <% end %>
                                             <% else %>
-                                                <%= link_to post_likes_path(id: t.id, post_id: t.id), method: :post do %>
                                                     <i class="fas fa-heart"></i><%= t.likes.count %>
-                                                <% end %>
-                                            <% end %>
-                                        <% else %>
-                                                <i class="fas fa-heart"></i><%= t.likes.count %>
-                                        <% end %></h5>
-                                        <p class="card-text"><%= t.body %></p>
-                                    </div>
+                                            <% end %></h5>
+                                            <p class="card-text"><%= t.body %></p>
+                                        </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <% end %>
-                <br>
+                    <% end %>
+                    <br>
+                </div>
             </div>
         </div>
     <br>  
