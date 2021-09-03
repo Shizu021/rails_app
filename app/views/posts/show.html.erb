@@ -28,9 +28,7 @@
                     <p>(<%= @post.genre %>
                     <%= @post.price %>)</p>
                 </div>
-                <div class="poster">
-                投稿者&emsp;<a href="/users/<%= @post.user.id %>"><%= @post.user.name %></a>
-                </div>
+                投稿者&emsp;<%= @post.user.name %>
                 <% if user_signed_in? && current_user.id == @post.user_id %> 
                     <%= link_to "編集する", edit_post_path(@post.id) %>
                     &emsp;<%= link_to "削除する", post_path(@post.id), method: :delete %>
@@ -66,7 +64,7 @@
         <br>
         <h4>いいねしたユーザー</h4>
         <% @post.liked_users.each do |user| %>
-            <a href="/users/<%= user.id %>"><%= user.name %></a>
+            <%= user.name %>
         <% end %>
         <br>
         <br>
