@@ -8,11 +8,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
-  resources :users do
-    member do
-      get :followings, :followers
-    end
-  end
+  
 
   root 'posts#index'
   
