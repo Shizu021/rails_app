@@ -3,6 +3,7 @@
         <br>
         <br>
         <br>
+        <br>
         <h3>マイページ</h3>
         <br>
         <p>名前 : <%= @user.name %>&emsp;</p>
@@ -17,6 +18,7 @@
         <br>
         <br>
         <h4>ユーザーの投稿一覧</h4>
+        <br>
         <div class="posts-container">
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 <% @user.posts.each do |t| %>
@@ -44,7 +46,9 @@
         </div>
         <br>
         <br>
+        <br>
         <h4>ユーザーがいいねした投稿一覧</h4>
+        <br>
         <div class="posts-container">
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 <% @user.liked_posts.each do |t| %>
@@ -78,10 +82,11 @@
                 <br>
             </div>
         </div>
-        
+    <br>  
     <br>
     <br>
     <h6><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></h6>
+    <br>
     <br>
     <br>
 </section>
