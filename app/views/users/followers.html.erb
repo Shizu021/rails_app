@@ -1,0 +1,29 @@
+<section id="eight-block">
+    <div class="title2-container">
+        <br>
+        <h3>&emsp;Follower Users&emsp;</h3>
+        <% if @users.exists? %>
+            <thead>
+                <tr>
+                <th>name</th>
+                <th></th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @users.each do |user| %>
+                    <tr>
+                        <td><a href="/users/<%= user.id %>"><%= user.name %></a></td>
+                        <td>フォロー数: <%= user.followings.count %></td>
+                        <td>フォロワー数: <%= user.followers.count %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+            </table>
+        <% else %>
+            <p>ユーザーはいません</p>
+        <% end %>
+        <br>
+        <br>
+    </div>
+</section>
